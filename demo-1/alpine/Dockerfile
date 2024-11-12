@@ -1,4 +1,4 @@
-FROM scratch
+FROM alpine:latest
 
 COPY bin/go-example /usr/local/bin/
 COPY bin/go-example-network /usr/local/bin/

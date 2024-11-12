@@ -2,17 +2,18 @@
 
 set -euo pipefail
 
-pushd ../go
+cd "$(dirname "${BASH_SOURCE[0]}")"
 
-GOOS=linux GOARCH=amd64 go build -o bin/go-example ../go/cmd/example/main.go
-GOOS=linux GOARCH=amd64 go build -o bin/go-example-network ../go/cmd/example-network/main.go
+# Create new bin/ and cleanup on script exit
+rm -rf bin/ && mkdir -p bin/
+trap 'rm -rf bin/' EXIT
 
-# TODO: Figure out how to avoid this
-cp bin/* ../demo-1/ubuntu-minimal/
-cp bin/* ../demo-1/scratch/
+# Build Go binaries and copy to local context
+../go/build-go.sh
+cp ../go/bin/* bin/
 
-popd
-
-docker build -t demo1-ubuntu:latest ubuntu-minimal/
-docker build -t demo1-scratch:latest scratch/
-# docker build -t demo1-scratch-ssl:latest .
+# Build Docker images
+docker build -t demo1-ubuntu:latest -f ubuntu/Dockerfile .
+docker build -t demo1-alpine:latest -f alpine/Dockerfile .
+docker build -t demo1-scratch:latest -f scratch/Dockerfile .
+docker build -t demo1-scratch-ssl:latest -f scratch-ssl/Dockerfile .
