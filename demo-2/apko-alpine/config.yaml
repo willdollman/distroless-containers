@@ -15,13 +15,5 @@ accounts:
       uid: 100
       gid: 101
 
-paths:
-  # Ensure /home/sourcegraph can be accessed by the sourcegraph group
-  - path: /home/bsides
-    type: directory
-    uid: 100
-    gid: 101
-    permissions: 0o775
-
 archs:
  - amd64
