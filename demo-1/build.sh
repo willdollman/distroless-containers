@@ -13,7 +13,6 @@ trap 'rm -rf bin/' EXIT
 cp ../go/bin/* bin/
 
 # Build Docker images
-docker build -t demo1-ubuntu:latest -f ubuntu/Dockerfile .
-docker build -t demo1-alpine:latest -f alpine/Dockerfile .
-docker build -t demo1-scratch:latest -f scratch/Dockerfile .
-docker build -t demo1-scratch-ssl:latest -f scratch-ssl/Dockerfile .
+docker build -t demo1/ubuntu:latest -f ubuntu/Dockerfile .
+docker build -t demo1/alpine:latest -f alpine/Dockerfile .
+docker build -t demo1/scratch:latest -f scratch/Dockerfile .
