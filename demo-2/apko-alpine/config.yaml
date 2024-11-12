@@ -1,0 +1,27 @@
+contents:
+  repositories:
+    - https://dl-cdn.alpinelinux.org/alpine/edge/main
+  packages:
+    ## Base set of packages
+    - alpine-baselayout-data
+    - ca-certificates-bundle
+
+accounts:
+  groups:
+    - groupname: bsides
+      gid: 101
+  users:
+    - username: bsides
+      uid: 100
+      gid: 101
+
+paths:
+  # Ensure /home/sourcegraph can be accessed by the sourcegraph group
+  - path: /home/bsides
+    type: directory
+    uid: 100
+    gid: 101
+    permissions: 0o775
+
+archs:
+ - amd64

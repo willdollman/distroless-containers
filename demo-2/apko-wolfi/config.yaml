@@ -1,0 +1,29 @@
+contents:
+  repositories:
+    - https://packages.wolfi.dev/os
+  keyring:
+      - https://packages.wolfi.dev/os/wolfi-signing.rsa.pub
+  packages:
+    ## Base set of packages
+    - wolfi-baselayout
+    - ca-certificates-bundle
+
+accounts:
+  groups:
+    - groupname: bsides
+      gid: 101
+  users:
+    - username: bsides
+      uid: 100
+      gid: 101
+
+paths:
+  # Ensure /home/sourcegraph can be accessed by the sourcegraph group
+  - path: /home/bsides
+    type: directory
+    uid: 100
+    gid: 101
+    permissions: 0o775
+
+archs:
+ - amd64
